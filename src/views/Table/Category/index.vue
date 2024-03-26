@@ -37,7 +37,7 @@
     </template>
 
     <template #item.action="{ item }">
-      <template v-if="!editIconClick">
+      <template v-if="!editingItemIds.includes(item.value.productCategoryID)">
         <VBtn
           color="#1E88E5"
           icon="mdi-pencil"
@@ -45,11 +45,13 @@
           @click="onEditItem(item)"
           title="Edit"
         ></VBtn>
+        {{}}
         <VBtn
           color="error"
           icon="mdi-trash-can"
           title="Delete"
           density="compact"
+          @click="deleteProduct(item)"
         ></VBtn>
       </template>
       <template v-else>
@@ -60,6 +62,7 @@
           title="Save"
           @click="onSavechange(item)"
         ></VBtn>
+        {{}}
         <VBtn
           color="#D50000"
           icon="mdi-cancel"
@@ -73,7 +76,7 @@
 
 <script setup lang="ts">
 import { VDataTable } from "vuetify/labs/VDataTable";
-import category from "@/services/category";
+import category from "@/services/categoryServices";
 import { fa } from "vuetify/lib/locale";
 import { tr } from "vuetify/lib/locale";
 
@@ -85,8 +88,8 @@ const tableConfig = ref({
   headers: [
     { title: "", key: "data-table-expand" },
     { title: "Image", key: "image" },
-    { title: "Tên", key: "categoryName" },
-    { title: "Thao tác", key: "action" },
+    { title: "Name", key: "categoryName" },
+    { title: "Action", key: "action" },
   ],
   data: [],
   pagination: {
@@ -97,7 +100,13 @@ const tableConfig = ref({
     totalItems: 1,
   },
 });
+
+const deleteProduct = (item) => {
+  alert(JSON.stringify(item.value.productCategoryID));
+};
+
 const onEditItem = (item) => {
+  editingItemIds.value = [];
   editedCategoryName.value = item.value.categoryName;
   editingItemIds.value.push(item.value.productCategoryID);
   editIconClick.value = true;

@@ -7,7 +7,7 @@ import {
   defaultConfig,
 } from "@/components/caiDatTongThe/type";
 import { VDataTable } from "vuetify/labs/VDataTable";
-import category from "@/services/category";
+import category from "@/services/categoryServices";
 
 const tableCategoryConfig = ref({
   headers: [

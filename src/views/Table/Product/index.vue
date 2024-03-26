@@ -120,9 +120,9 @@
 import { onMounted, ref, getCurrentInstance } from "vue";
 import ComposeDialog from "@/components/dialogs/ConfirmDialog.vue";
 import { VDataTable } from "vuetify/labs/VDataTable";
-import ProductServices from "@/services/product";
+import ProductServices from "@/services/productServices";
 import { IProductCategoryServicesRes } from "@/interfaces/res/Response_Models/IProductCategoryServices.res";
-import category from "@/services/category";
+import category from "@/services/categoryServices";
 
 const queryParams: IProductQueryParams = ref<IProductQueryParams>({});
 const categoryDatasource = ref([]);
